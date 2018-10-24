@@ -13,6 +13,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.backgroundColor = .red
         setupNavigationItems()
     }
 
@@ -25,6 +26,16 @@ class ViewController: UITableViewController {
     //MARK: Actions
     @objc func handleOpen() {
         print("opening...")
+        
+        //how do we add a ViewController instead of just plain UIView
+        let vc = MenuController()
+        vc.view.backgroundColor = .yellow
+        
+        vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height)
+        
+        let mainWindow = UIApplication.shared.keyWindow
+        mainWindow?.addSubview(vc.view)
+        
     }
     
     @objc func handleHide() {
