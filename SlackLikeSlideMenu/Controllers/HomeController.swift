@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class HomeController: UITableViewController {
+    
+    let menuController = MenuController()
+    let menuWidth: CGFloat = 300
+    lazy var slideTransform: CGAffineTransform = CGAffineTransform(translationX: menuWidth, y: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +32,27 @@ class ViewController: UITableViewController {
         print("opening...")
         
         //how do we add a ViewController instead of just plain UIView
-        let vc = MenuController()
-        vc.view.backgroundColor = .yellow
-        
-        vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: self.view.frame.height)
+        menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: self.view.frame.height)
         
         let mainWindow = UIApplication.shared.keyWindow
-        mainWindow?.addSubview(vc.view)
+        mainWindow?.addSubview(menuController.view)
         
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.menuController.view.transform = self.slideTransform
+            self.view.transform = self.slideTransform
+        })
+        
+        addChild(menuController)
     }
     
     @objc func handleHide() {
         print("Hiding...")
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.menuController.view.transform = .identity
+            self.view.transform = .identity
+        })
+//        menuController.view.removeFromSuperview()
+//        menuController.removeFromParent()
     }
     
     
@@ -49,7 +62,8 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellId")
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "teste")
+        cell.textLabel?.text = "Cell: Section \(indexPath.section) - Row \(indexPath.row)"
         return cell
     }
 }
