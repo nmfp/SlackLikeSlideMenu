@@ -12,13 +12,17 @@ class HomeController: UITableViewController {
     
     let menuController = MenuController()
     let menuWidth: CGFloat = 300
-    lazy var slideTransform: CGAffineTransform = CGAffineTransform(translationX: menuWidth, y: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.backgroundColor = .red
         setupNavigationItems()
+        
+        setupMenuController()
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGesture)
     }
 
     func setupNavigationItems() {
@@ -28,31 +32,46 @@ class HomeController: UITableViewController {
     }
 
     //MARK: Actions
-    @objc func handleOpen() {
-        print("opening...")
+    @objc func handlePan(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
         
+        if gesture.state == .changed {
+            var x = translation.x
+            x = min(menuWidth, x)
+            x = max(0, x)
+            
+            let transform = CGAffineTransform(translationX: x, y: 0)
+            menuController.view.transform = transform
+            navigationController?.view.transform = transform
+        } else if gesture.state == .ended {
+            handleOpen()
+        }
+    }
+    
+    
+    fileprivate func setupMenuController() {
         //how do we add a ViewController instead of just plain UIView
         menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: self.view.frame.height)
         
         let mainWindow = UIApplication.shared.keyWindow
         mainWindow?.addSubview(menuController.view)
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.menuController.view.transform = self.slideTransform
-            self.view.transform = self.slideTransform
-        })
-        
         addChild(menuController)
     }
     
+    @objc func handleOpen() {
+        performAnimations(transform: CGAffineTransform(translationX: menuWidth, y: 0))
+    }
+    
     @objc func handleHide() {
-        print("Hiding...")
+        performAnimations(transform: .identity)
+    }
+    
+    private func performAnimations(transform: CGAffineTransform) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.menuController.view.transform = .identity
-            self.view.transform = .identity
+            self.menuController.view.transform = transform
+//            self.view.transform = transform
+            self.navigationController?.view.transform = transform
         })
-//        menuController.view.removeFromSuperview()
-//        menuController.removeFromParent()
     }
     
     
