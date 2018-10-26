@@ -14,7 +14,9 @@ class HomeController: UITableViewController {
     private let menuWidth: CGFloat = 300
     private var isMenuOpened = false
     private let velocityOpenThreshold: CGFloat = 500
+    private let darkCoverView = UIView()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +25,8 @@ class HomeController: UITableViewController {
         
         setupMenuController()
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(panGesture)
+        setupPanGesture()
+        setupDarkerCoverView()
     }
 
     func setupNavigationItems() {
@@ -50,6 +52,9 @@ class HomeController: UITableViewController {
             let transform = CGAffineTransform(translationX: x, y: 0)
             menuController.view.transform = transform
             navigationController?.view.transform = transform
+            darkCoverView.transform = transform
+            
+            darkCoverView.alpha = x / menuWidth
         } else if gesture.state == .ended {
             handleEnded(gesture: gesture)
         }
@@ -83,6 +88,20 @@ class HomeController: UITableViewController {
         }
     }
     
+    private func setupDarkerCoverView() {
+        darkCoverView.alpha = 0
+        darkCoverView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        darkCoverView.isUserInteractionEnabled = false
+        darkCoverView.frame = UIApplication.shared.keyWindow?.frame ?? .zero
+        UIApplication.shared.keyWindow?.addSubview(darkCoverView)
+    }
+    
+    
+    fileprivate func setupPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGesture)
+    }
+    
     fileprivate func setupMenuController() {
         //how do we add a ViewController instead of just plain UIView
         menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: self.view.frame.height)
@@ -105,8 +124,9 @@ class HomeController: UITableViewController {
     private func performAnimations(transform: CGAffineTransform) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.menuController.view.transform = transform
-//            self.view.transform = transform
             self.navigationController?.view.transform = transform
+            self.darkCoverView.transform = transform
+            self.darkCoverView.alpha = transform == .identity ? 0 : 1
         })
     }
     
