@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeController: UITableViewController {
+class HomeController: UITableViewController, UIGestureRecognizerDelegate {
     
     private let menuController = MenuController()
     private let menuWidth: CGFloat = 300
@@ -99,6 +99,7 @@ class HomeController: UITableViewController {
     
     fileprivate func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
     }
     
@@ -130,6 +131,10 @@ class HomeController: UITableViewController {
         })
     }
     
+//    //MARK:- PanGesture delegate
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
     
     //MARK: - TableViewController
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

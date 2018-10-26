@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A467D3A21839C6D00738402 /* BaseSlidingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A467D3921839C6C00738402 /* BaseSlidingController.swift */; };
 		1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */; };
 		1FC5EEA3217DB70F0074FE74 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA2217DB70F0074FE74 /* HomeController.swift */; };
 		1FC5EEA6217DB70F0074FE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA4217DB70F0074FE74 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A467D3921839C6C00738402 /* BaseSlidingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSlidingController.swift; sourceTree = "<group>"; };
 		1FC5EE9D217DB70F0074FE74 /* SlackLikeSlideMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackLikeSlideMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FC5EEA2217DB70F0074FE74 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -37,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A467D3821839C4000738402 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0A467D3921839C6C00738402 /* BaseSlidingController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		1FC5EE94217DB70F0074FE74 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +79,7 @@
 		1FC5EEB2218138CA0074FE74 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A467D3821839C4000738402 /* Base */,
 				1FC5EEA2217DB70F0074FE74 /* HomeController.swift */,
 				1FC5EEB3218138F60074FE74 /* MenuController.swift */,
 			);
@@ -149,6 +160,7 @@
 				1FC5EEA3217DB70F0074FE74 /* HomeController.swift in Sources */,
 				1FC5EEB4218138F60074FE74 /* MenuController.swift in Sources */,
 				1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */,
+				0A467D3A21839C6D00738402 /* BaseSlidingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
