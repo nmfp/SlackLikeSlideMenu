@@ -10,8 +10,10 @@ import UIKit
 
 class HomeController: UITableViewController {
     
-    let menuController = MenuController()
-    let menuWidth: CGFloat = 300
+    private let menuController = MenuController()
+    private let menuWidth: CGFloat = 300
+    private var isMenuOpened = false
+    private let velocityOpenThreshold: CGFloat = 500
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,11 @@ class HomeController: UITableViewController {
         
         if gesture.state == .changed {
             var x = translation.x
+            
+            if isMenuOpened {
+                x += menuWidth
+            }
+            
             x = min(menuWidth, x)
             x = max(0, x)
             
@@ -44,10 +51,37 @@ class HomeController: UITableViewController {
             menuController.view.transform = transform
             navigationController?.view.transform = transform
         } else if gesture.state == .ended {
-            handleOpen()
+            handleEnded(gesture: gesture)
         }
     }
     
+    private func handleEnded(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
+        if isMenuOpened {
+            if abs(velocity.x) > velocityOpenThreshold {
+                handleHide()
+                return
+            }
+            
+            if abs(translation.x) < menuWidth / 2 {
+                handleOpen()
+            } else {
+                handleHide()
+            }
+        } else {
+            if velocity.x > velocityOpenThreshold {
+                handleOpen()
+                return
+            }
+            if translation.x < menuWidth / 2 {
+                handleHide()
+            } else {
+                handleOpen()
+            }
+        }
+    }
     
     fileprivate func setupMenuController() {
         //how do we add a ViewController instead of just plain UIView
@@ -59,10 +93,12 @@ class HomeController: UITableViewController {
     }
     
     @objc func handleOpen() {
+        isMenuOpened = true
         performAnimations(transform: CGAffineTransform(translationX: menuWidth, y: 0))
     }
     
     @objc func handleHide() {
+        isMenuOpened = false
         performAnimations(transform: .identity)
     }
     
