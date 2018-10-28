@@ -23,10 +23,21 @@ class BaseSlidingController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    lazy var darkView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        view.alpha = 0
+        view.isUserInteractionEnabled = false
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     var redViewLeadingConstraint: NSLayoutConstraint!
     let menuWidth: CGFloat = 300
     var isMenuOpened = false
+    let velocityThreshold: CGFloat = 500
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +45,7 @@ class BaseSlidingController: UIViewController {
 
         setupViews()
         setupGesture()
+        
     }
     
     fileprivate func setupViews() {
@@ -70,6 +82,7 @@ class BaseSlidingController: UIViewController {
         homeView.translatesAutoresizingMaskIntoConstraints = false
         menuView.translatesAutoresizingMaskIntoConstraints = false
         redView.addSubview(homeView)
+        redView.addSubview(darkView)
         blueView.addSubview(menuView)
         
         addChild(homeController)
@@ -84,16 +97,23 @@ class BaseSlidingController: UIViewController {
             menuView.topAnchor.constraint(equalTo: blueView.topAnchor),
             menuView.leadingAnchor.constraint(equalTo: blueView.leadingAnchor),
             menuView.trailingAnchor.constraint(equalTo: blueView.trailingAnchor),
-            menuView.bottomAnchor.constraint(equalTo: blueView.bottomAnchor)
+            menuView.bottomAnchor.constraint(equalTo: blueView.bottomAnchor),
+            
+            darkView.topAnchor.constraint(equalTo: redView.topAnchor),
+            darkView.leadingAnchor.constraint(equalTo: redView.leadingAnchor),
+            darkView.trailingAnchor.constraint(equalTo: redView.trailingAnchor),
+            darkView.bottomAnchor.constraint(equalTo: redView.bottomAnchor)
             ])
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
+        
         var x = translation.x
         
-        x = isMenuOpened ? x + menuWidth : x
         
+        x = isMenuOpened ? x + menuWidth : x
+        darkView.alpha = abs(x) / menuWidth
         x = min(menuWidth, x)
         x = max(0, x)
         redViewLeadingConstraint.constant = x
@@ -105,17 +125,49 @@ class BaseSlidingController: UIViewController {
     
     private func handleEnded(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
         
-        if translation.x < menuWidth / 2 {
-            redViewLeadingConstraint.constant = 0
-            isMenuOpened = false
+        if isMenuOpened {
+            if abs(velocity.x) > velocityThreshold {
+                handleCloseMenu()
+                return
+            }
+            
+            if abs(translation.x) < menuWidth / 2 {
+                handleOpenMenu()
+            } else {
+                handleCloseMenu()
+            }
         } else {
-            redViewLeadingConstraint.constant = menuWidth
-            isMenuOpened = true
+            if velocity.x > velocityThreshold {
+                handleOpenMenu()
+                return
+            }
+
+            if translation.x < menuWidth / 2 {
+                handleCloseMenu()
+            } else {
+                handleOpenMenu()
+            }
         }
-        
+    }
+    
+    private func handleOpenMenu() {
+        redViewLeadingConstraint.constant = menuWidth
+        isMenuOpened = true
+        performAnimations()
+    }
+    
+    private func handleCloseMenu() {
+        redViewLeadingConstraint.constant = 0
+        isMenuOpened = false
+        performAnimations()
+    }
+    
+    private func performAnimations() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.layoutIfNeeded()
+            self.darkView.alpha = self.isMenuOpened ? 1 : 0
         })
     }
 }
