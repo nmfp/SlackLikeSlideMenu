@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0A467D3A21839C6D00738402 /* BaseSlidingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A467D3921839C6C00738402 /* BaseSlidingController.swift */; };
+		1F02F7DB21862AEA00EF8A73 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DA21862AEA00EF8A73 /* CustomHeaderView.swift */; };
+		1F02F7DD2186303100EF8A73 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DC2186303100EF8A73 /* SpacerView.swift */; };
+		1F02F7DF218690EA00EF8A73 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DE218690EA00EF8A73 /* ProfileImageView.swift */; };
 		1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */; };
 		1FC5EEA3217DB70F0074FE74 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA2217DB70F0074FE74 /* HomeController.swift */; };
 		1FC5EEA6217DB70F0074FE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA4217DB70F0074FE74 /* Main.storyboard */; };
@@ -18,6 +21,9 @@
 
 /* Begin PBXFileReference section */
 		0A467D3921839C6C00738402 /* BaseSlidingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSlidingController.swift; sourceTree = "<group>"; };
+		1F02F7DA21862AEA00EF8A73 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
+		1F02F7DC2186303100EF8A73 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
+		1F02F7DE218690EA00EF8A73 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		1FC5EE9D217DB70F0074FE74 /* SlackLikeSlideMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackLikeSlideMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FC5EEA2217DB70F0074FE74 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -47,6 +53,16 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		1F02F7D921862ACA00EF8A73 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F02F7DA21862AEA00EF8A73 /* CustomHeaderView.swift */,
+				1F02F7DC2186303100EF8A73 /* SpacerView.swift */,
+				1F02F7DE218690EA00EF8A73 /* ProfileImageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1FC5EE94217DB70F0074FE74 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +82,7 @@
 		1FC5EE9F217DB70F0074FE74 /* SlackLikeSlideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				1F02F7D921862ACA00EF8A73 /* Views */,
 				1FC5EEB2218138CA0074FE74 /* Controllers */,
 				1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */,
 				1FC5EEA4217DB70F0074FE74 /* Main.storyboard */,
@@ -157,7 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F02F7DB21862AEA00EF8A73 /* CustomHeaderView.swift in Sources */,
+				1F02F7DF218690EA00EF8A73 /* ProfileImageView.swift in Sources */,
 				1FC5EEA3217DB70F0074FE74 /* HomeController.swift in Sources */,
+				1F02F7DD2186303100EF8A73 /* SpacerView.swift in Sources */,
 				1FC5EEB4218138F60074FE74 /* MenuController.swift in Sources */,
 				1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */,
 				0A467D3A21839C6D00738402 /* BaseSlidingController.swift in Sources */,
