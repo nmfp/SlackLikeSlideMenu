@@ -108,14 +108,13 @@ class BaseSlidingController: UIViewController {
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
-        
         var x = translation.x
         
-        
         x = isMenuOpened ? x + menuWidth : x
-        darkView.alpha = abs(x) / menuWidth
         x = min(menuWidth, x)
         x = max(0, x)
+        
+        darkView.alpha = x / menuWidth
         redViewLeadingConstraint.constant = x
         
         if gesture.state == .ended {
