@@ -7,3 +7,9 @@
 //
 
 import Foundation
+import UIKit
+
+struct MenuItem {
+    let icon: UIImage
+    let title: String
+}

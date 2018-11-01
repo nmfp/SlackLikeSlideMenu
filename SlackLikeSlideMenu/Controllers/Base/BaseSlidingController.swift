@@ -151,16 +151,36 @@ class BaseSlidingController: UIViewController {
         }
     }
     
-    private func handleOpenMenu() {
+     func handleOpenMenu() {
         redViewLeadingConstraint.constant = menuWidth
         isMenuOpened = true
         performAnimations()
     }
     
-    private func handleCloseMenu() {
+     func handleCloseMenu() {
         redViewLeadingConstraint.constant = 0
         isMenuOpened = false
         performAnimations()
+    }
+    
+    func didSelectMenuItem(indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let homeController = HomeController()
+            redView.addSubview(homeController.view)
+        default:
+            let dummyController = UIViewController()
+            dummyController.view.backgroundColor = .white
+            dummyController.view.frame = view.frame
+            let label = UILabel()
+            label.text = ["1", "2", "3", "4"].randomElement()
+            label.frame = dummyController.view.frame
+            dummyController.view.addSubview(label)
+            redView.addSubview(dummyController.view)
+        }
+        
+        redView.bringSubviewToFront(darkView)
+        handleCloseMenu()
     }
     
     private func performAnimations() {

@@ -10,19 +10,28 @@ import UIKit
 
 class MenuController: UITableViewController {
     
+    let cellId = "cellId"
+    let menuItems = [
+        MenuItem(icon: #imageLiteral(resourceName: "profile"), title: "Home"),
+        MenuItem(icon: #imageLiteral(resourceName: "lists"), title: "Lists"),
+        MenuItem(icon: #imageLiteral(resourceName: "bookmarks"), title: "Bookmarks"),
+        MenuItem(icon: #imageLiteral(resourceName: "moments"), title: "Moments")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
-        
+        tableView.separatorStyle = .none
+        tableView.register(MenuItemCell.self, forCellReuseIdentifier: cellId)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return menuItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellId")
-        cell.textLabel?.text = "Menu"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! MenuItemCell
+        cell.titleLabel.text = menuItems[indexPath.row].title
+        cell.iconImageView.image = menuItems[indexPath.row].icon
         return cell
     }
     
@@ -31,7 +40,8 @@ class MenuController: UITableViewController {
         return customHeaderView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let baseSlidingController = UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController
+        baseSlidingController?.didSelectMenuItem(indexPath: indexPath)
     }
 }
