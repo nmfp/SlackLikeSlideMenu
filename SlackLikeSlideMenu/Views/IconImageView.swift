@@ -7,3 +7,23 @@
 //
 
 import Foundation
+import UIKit
+
+class IconImageView: BaseImageView { }
+
+class BaseImageView: UIImageView {
+    var value: CGFloat!
+    
+    override var intrinsicContentSize: CGSize {
+        return .init(width: value, height: value)
+    }
+    
+    init(with value: CGFloat) {
+        self.value = value
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

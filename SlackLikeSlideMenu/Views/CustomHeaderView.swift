@@ -45,10 +45,7 @@ class CustomHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .orange
-        
-        
+        backgroundColor = .white
         setupStackView()
         setupViews()
     }
@@ -66,7 +63,7 @@ class CustomHeaderView: UIView {
     }
     
     private func setupStackView() {
-        stackView = UIStackView(arrangedSubviews: [UIView(), UIStackView(arrangedSubviews: [profileImage, UIView()]), nameLabel, usernameLabel, SpacerView(space: 16), statsLabel])
+        stackView = UIStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [profileImage, UIView()]), nameLabel, usernameLabel, SpacerView(space: 16), statsLabel])
         stackView.axis = .vertical
         stackView.spacing = 4
         stackView.translatesAutoresizingMaskIntoConstraints = false
