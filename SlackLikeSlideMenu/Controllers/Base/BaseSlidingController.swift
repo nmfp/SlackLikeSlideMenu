@@ -8,24 +8,28 @@
 
 import UIKit
 
+class RedViewContainer: UIView { }
+class BlueViewContainer: UIView { }
+class DarkViewContainer: UIView { }
+
 class BaseSlidingController: UIViewController {
     
-    lazy var redView: UIView = {
-        let view = UIView()
+    lazy var redView: RedViewContainer = {
+        let view = RedViewContainer()
         view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var blueView: UIView = {
-        let view = UIView()
+    lazy var blueView: BlueViewContainer = {
+        let view = BlueViewContainer()
         view.backgroundColor = .blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var darkView: UIView = {
-        let view = UIView()
+    lazy var darkView: DarkViewContainer = {
+        let view = DarkViewContainer()
         view.backgroundColor = UIColor(white: 0, alpha: 0.8)
         view.alpha = 0
         view.isUserInteractionEnabled = false
