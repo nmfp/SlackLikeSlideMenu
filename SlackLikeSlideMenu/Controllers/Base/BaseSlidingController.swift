@@ -37,6 +37,7 @@ class BaseSlidingController: UIViewController {
     let menuWidth: CGFloat = 300
     var isMenuOpened = false
     let velocityThreshold: CGFloat = 500
+    var rightViewController: UIViewController?
     
     
     override func viewDidLoad() {
@@ -75,9 +76,9 @@ class BaseSlidingController: UIViewController {
     }
     
     private func setupViewControllers() {
-        let homeController = HomeController()
+        rightViewController = HomeController()
         let menuController = MenuController()
-        let homeView = homeController.view!
+        let homeView = rightViewController!.view!
         let menuView = menuController.view!
         homeView.translatesAutoresizingMaskIntoConstraints = false
         menuView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +86,7 @@ class BaseSlidingController: UIViewController {
         redView.addSubview(darkView)
         blueView.addSubview(menuView)
         
-        addChild(homeController)
+        addChild(rightViewController!)
         addChild(menuController)
         
         NSLayoutConstraint.activate([
@@ -164,10 +165,24 @@ class BaseSlidingController: UIViewController {
     }
     
     func didSelectMenuItem(indexPath: IndexPath) {
+        removePreviousControllerFromParent()
+        
         switch indexPath.row {
         case 0:
             let homeController = HomeController()
             redView.addSubview(homeController.view)
+            addChild(homeController)
+            rightViewController = homeController
+        case 1:
+            let listController = ListController()
+            redView.addSubview(listController.view)
+            addChild(listController)
+            rightViewController = listController
+        case 2:
+            let bookmarksController = BookmarksController()
+            redView.addSubview(bookmarksController.view)
+            addChild(bookmarksController)
+            rightViewController = bookmarksController
         default:
             let dummyController = UIViewController()
             dummyController.view.backgroundColor = .white
@@ -177,10 +192,17 @@ class BaseSlidingController: UIViewController {
             label.frame = dummyController.view.frame
             dummyController.view.addSubview(label)
             redView.addSubview(dummyController.view)
+            addChild(dummyController)
+            rightViewController = dummyController
         }
         
         redView.bringSubviewToFront(darkView)
         handleCloseMenu()
+    }
+    
+    private func removePreviousControllerFromParent() {
+        rightViewController?.view.removeFromSuperview()
+        rightViewController?.removeFromParent()
     }
     
     private func performAnimations() {

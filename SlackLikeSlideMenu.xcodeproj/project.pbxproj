@@ -14,6 +14,8 @@
 		1F590C73218B7BBF00086548 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C72218B7BBF00086548 /* MenuItem.swift */; };
 		1F590C75218B7D1100086548 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C74218B7D1100086548 /* MenuItemCell.swift */; };
 		1F590C77218B8B2800086548 /* IconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C76218B8B2800086548 /* IconImageView.swift */; };
+		1F590C79218BB35B00086548 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C78218BB35B00086548 /* ListController.swift */; };
+		1F590C7B218BB3C700086548 /* BookmarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C7A218BB3C700086548 /* BookmarksController.swift */; };
 		1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */; };
 		1FC5EEA3217DB70F0074FE74 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA2217DB70F0074FE74 /* HomeController.swift */; };
 		1FC5EEA6217DB70F0074FE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5EEA4217DB70F0074FE74 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 		1F590C72218B7BBF00086548 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		1F590C74218B7D1100086548 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		1F590C76218B8B2800086548 /* IconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImageView.swift; sourceTree = "<group>"; };
+		1F590C78218BB35B00086548 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		1F590C7A218BB3C700086548 /* BookmarksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksController.swift; sourceTree = "<group>"; };
 		1FC5EE9D217DB70F0074FE74 /* SlackLikeSlideMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackLikeSlideMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FC5EEA0217DB70F0074FE74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FC5EEA2217DB70F0074FE74 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				0A467D3821839C4000738402 /* Base */,
 				1FC5EEA2217DB70F0074FE74 /* HomeController.swift */,
 				1FC5EEB3218138F60074FE74 /* MenuController.swift */,
+				1F590C78218BB35B00086548 /* ListController.swift */,
+				1F590C7A218BB3C700086548 /* BookmarksController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -200,6 +206,8 @@
 				1F590C73218B7BBF00086548 /* MenuItem.swift in Sources */,
 				1F590C75218B7D1100086548 /* MenuItemCell.swift in Sources */,
 				1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */,
+				1F590C7B218BB3C700086548 /* BookmarksController.swift in Sources */,
+				1F590C79218BB35B00086548 /* ListController.swift in Sources */,
 				0A467D3A21839C6D00738402 /* BaseSlidingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
