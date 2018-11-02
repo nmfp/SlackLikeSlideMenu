@@ -32,11 +32,11 @@ class HomeController: UITableViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func handleOpen() {
-        
+        (UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController)?.handleOpenMenu()
     }
     
     @objc func handleHide() {
-        
+        (UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController)?.handleCloseMenu()
     }
     
     //MARK: - TableViewController

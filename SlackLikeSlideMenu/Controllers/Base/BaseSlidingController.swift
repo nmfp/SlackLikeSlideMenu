@@ -80,7 +80,7 @@ class BaseSlidingController: UIViewController {
     }
     
     private func setupViewControllers() {
-        rightViewController = HomeController()
+        rightViewController = UINavigationController(rootViewController: HomeController())
         let menuController = MenuController()
         let homeView = rightViewController!.view!
         let menuView = menuController.view!
@@ -170,18 +170,19 @@ class BaseSlidingController: UIViewController {
     
     func didSelectMenuItem(indexPath: IndexPath) {
         removePreviousControllerFromParent()
+        handleCloseMenu()
         
         switch indexPath.row {
         case 0:
-            let homeController = HomeController()
-            redView.addSubview(homeController.view)
-            addChild(homeController)
-            rightViewController = homeController
+            let navController = UINavigationController(rootViewController: HomeController())
+            redView.addSubview(navController.view)
+            addChild(navController)
+            rightViewController = navController
         case 1:
-            let listController = ListController()
-            redView.addSubview(listController.view)
-            addChild(listController)
-            rightViewController = listController
+            let navController = UINavigationController(rootViewController: ListController())
+            redView.addSubview(navController.view)
+            addChild(navController)
+            rightViewController = navController
         case 2:
             let bookmarksController = BookmarksController()
             redView.addSubview(bookmarksController.view)
@@ -201,7 +202,6 @@ class BaseSlidingController: UIViewController {
         }
         
         redView.bringSubviewToFront(darkView)
-        handleCloseMenu()
     }
     
     private func removePreviousControllerFromParent() {

@@ -13,6 +13,8 @@ class ListController: UIViewController {
     let label: UILabel = {
         let label = UILabel()
         label.text = "LIST"
+        label.font = UIFont.systemFont(ofSize: 64, weight: .semibold)
+        label.textAlignment = .center
         return label
     }()
     
@@ -20,6 +22,7 @@ class ListController: UIViewController {
         super.viewDidLoad()
         label.frame = view.frame
         view.addSubview(label)
+        view.backgroundColor = .white
     }
 
 }
