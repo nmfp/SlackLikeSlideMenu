@@ -32,7 +32,6 @@ class BaseSlidingController: UIViewController {
         let view = DarkViewContainer()
         view.backgroundColor = UIColor(white: 0, alpha: 0.8)
         view.alpha = 0
-        view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -77,6 +76,9 @@ class BaseSlidingController: UIViewController {
     private func setupGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(panGesture)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss))
+        darkView.addGestureRecognizer(tapGesture)
     }
     
     private func setupViewControllers() {
@@ -109,6 +111,10 @@ class BaseSlidingController: UIViewController {
             darkView.trailingAnchor.constraint(equalTo: redView.trailingAnchor),
             darkView.bottomAnchor.constraint(equalTo: redView.bottomAnchor)
             ])
+    }
+    
+    @objc func handleTapDismiss() {
+        handleCloseMenu()
     }
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
