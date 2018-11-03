@@ -37,6 +37,7 @@ class BaseSlidingController: UIViewController {
     }()
 
     var redViewLeadingConstraint: NSLayoutConstraint!
+    var redViewTrailingConstraint: NSLayoutConstraint!
     let menuWidth: CGFloat = 300
     var isMenuOpened = false
     let velocityThreshold: CGFloat = 500
@@ -58,7 +59,6 @@ class BaseSlidingController: UIViewController {
         
         NSLayoutConstraint.activate([
             redView.topAnchor.constraint(equalTo: view.topAnchor),
-            redView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             redView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             blueView.topAnchor.constraint(equalTo: redView.topAnchor),
@@ -68,7 +68,9 @@ class BaseSlidingController: UIViewController {
             ])
         
         redViewLeadingConstraint = redView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        redViewTrailingConstraint = redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         redViewLeadingConstraint.isActive = true
+        redViewTrailingConstraint.isActive = true
         
         setupViewControllers()
     }
@@ -127,6 +129,7 @@ class BaseSlidingController: UIViewController {
         
         darkView.alpha = x / menuWidth
         redViewLeadingConstraint.constant = x
+        redViewTrailingConstraint.constant = x
         
         if gesture.state == .ended {
             handleEnded(gesture: gesture)
@@ -164,12 +167,14 @@ class BaseSlidingController: UIViewController {
     
      func handleOpenMenu() {
         redViewLeadingConstraint.constant = menuWidth
+        redViewTrailingConstraint.constant = menuWidth
         isMenuOpened = true
         performAnimations()
     }
     
      func handleCloseMenu() {
         redViewLeadingConstraint.constant = 0
+        redViewTrailingConstraint.constant = 0
         isMenuOpened = false
         performAnimations()
     }
