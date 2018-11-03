@@ -32,12 +32,12 @@ class BaseSlidingController: UIViewController {
         let view = DarkViewContainer()
         view.backgroundColor = UIColor(white: 0, alpha: 0.8)
         view.alpha = 0
-        view.isUserInteractionEnabled = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     var redViewLeadingConstraint: NSLayoutConstraint!
+    var redViewTrailingConstraint: NSLayoutConstraint!
     let menuWidth: CGFloat = 300
     var isMenuOpened = false
     let velocityThreshold: CGFloat = 500
@@ -59,7 +59,6 @@ class BaseSlidingController: UIViewController {
         
         NSLayoutConstraint.activate([
             redView.topAnchor.constraint(equalTo: view.topAnchor),
-            redView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             redView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             blueView.topAnchor.constraint(equalTo: redView.topAnchor),
@@ -69,7 +68,9 @@ class BaseSlidingController: UIViewController {
             ])
         
         redViewLeadingConstraint = redView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+        redViewTrailingConstraint = redView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         redViewLeadingConstraint.isActive = true
+        redViewTrailingConstraint.isActive = true
         
         setupViewControllers()
     }
@@ -77,6 +78,9 @@ class BaseSlidingController: UIViewController {
     private func setupGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(panGesture)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss))
+        darkView.addGestureRecognizer(tapGesture)
     }
     
     private func setupViewControllers() {
@@ -111,6 +115,10 @@ class BaseSlidingController: UIViewController {
             ])
     }
     
+    @objc func handleTapDismiss() {
+        handleCloseMenu()
+    }
+    
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         var x = translation.x
@@ -121,6 +129,7 @@ class BaseSlidingController: UIViewController {
         
         darkView.alpha = x / menuWidth
         redViewLeadingConstraint.constant = x
+        redViewTrailingConstraint.constant = x
         
         if gesture.state == .ended {
             handleEnded(gesture: gesture)
@@ -158,12 +167,14 @@ class BaseSlidingController: UIViewController {
     
      func handleOpenMenu() {
         redViewLeadingConstraint.constant = menuWidth
+        redViewTrailingConstraint.constant = menuWidth
         isMenuOpened = true
         performAnimations()
     }
     
      func handleCloseMenu() {
         redViewLeadingConstraint.constant = 0
+        redViewTrailingConstraint.constant = 0
         isMenuOpened = false
         performAnimations()
     }
