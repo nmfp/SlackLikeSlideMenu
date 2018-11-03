@@ -11,6 +11,7 @@
 		1F02F7DB21862AEA00EF8A73 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DA21862AEA00EF8A73 /* CustomHeaderView.swift */; };
 		1F02F7DD2186303100EF8A73 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DC2186303100EF8A73 /* SpacerView.swift */; };
 		1F02F7DF218690EA00EF8A73 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02F7DE218690EA00EF8A73 /* ProfileImageView.swift */; };
+		1F03E507218E2C9C00C593C5 /* ChatroomsMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F03E506218E2C9C00C593C5 /* ChatroomsMenuController.swift */; };
 		1F590C73218B7BBF00086548 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C72218B7BBF00086548 /* MenuItem.swift */; };
 		1F590C75218B7D1100086548 /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C74218B7D1100086548 /* MenuItemCell.swift */; };
 		1F590C77218B8B2800086548 /* IconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F590C76218B8B2800086548 /* IconImageView.swift */; };
@@ -29,6 +30,7 @@
 		1F02F7DA21862AEA00EF8A73 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		1F02F7DC2186303100EF8A73 /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		1F02F7DE218690EA00EF8A73 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		1F03E506218E2C9C00C593C5 /* ChatroomsMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomsMenuController.swift; sourceTree = "<group>"; };
 		1F590C72218B7BBF00086548 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		1F590C74218B7D1100086548 /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
 		1F590C76218B8B2800086548 /* IconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconImageView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				1FC5EEB3218138F60074FE74 /* MenuController.swift */,
 				1F590C78218BB35B00086548 /* ListController.swift */,
 				1F590C7A218BB3C700086548 /* BookmarksController.swift */,
+				1F03E506218E2C9C00C593C5 /* ChatroomsMenuController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				1F02F7DD2186303100EF8A73 /* SpacerView.swift in Sources */,
 				1FC5EEB4218138F60074FE74 /* MenuController.swift in Sources */,
 				1F590C73218B7BBF00086548 /* MenuItem.swift in Sources */,
+				1F03E507218E2C9C00C593C5 /* ChatroomsMenuController.swift in Sources */,
 				1F590C75218B7D1100086548 /* MenuItemCell.swift in Sources */,
 				1FC5EEA1217DB70F0074FE74 /* AppDelegate.swift in Sources */,
 				1F590C7B218BB3C700086548 /* BookmarksController.swift in Sources */,

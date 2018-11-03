@@ -43,6 +43,7 @@ class BaseSlidingController: UIViewController {
     let velocityThreshold: CGFloat = 500
     var rightViewController: UIViewController?
     
+    let menuController = ChatroomsMenuController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +86,7 @@ class BaseSlidingController: UIViewController {
     
     private func setupViewControllers() {
         rightViewController = UINavigationController(rootViewController: HomeController())
-        let menuController = MenuController()
+        
         let homeView = rightViewController!.view!
         let menuView = menuController.view!
         homeView.translatesAutoresizingMaskIntoConstraints = false
