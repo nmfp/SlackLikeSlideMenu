@@ -8,24 +8,28 @@
 
 import UIKit
 
+class RedViewContainer: UIView { }
+class BlueViewContainer: UIView { }
+class DarkViewContainer: UIView { }
+
 class BaseSlidingController: UIViewController {
     
-    lazy var redView: UIView = {
-        let view = UIView()
+    lazy var redView: RedViewContainer = {
+        let view = RedViewContainer()
         view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var blueView: UIView = {
-        let view = UIView()
+    lazy var blueView: BlueViewContainer = {
+        let view = BlueViewContainer()
         view.backgroundColor = .blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var darkView: UIView = {
-        let view = UIView()
+    lazy var darkView: DarkViewContainer = {
+        let view = DarkViewContainer()
         view.backgroundColor = UIColor(white: 0, alpha: 0.8)
         view.alpha = 0
         view.isUserInteractionEnabled = false
@@ -37,6 +41,7 @@ class BaseSlidingController: UIViewController {
     let menuWidth: CGFloat = 300
     var isMenuOpened = false
     let velocityThreshold: CGFloat = 500
+    var rightViewController: UIViewController?
     
     
     override func viewDidLoad() {
@@ -75,9 +80,9 @@ class BaseSlidingController: UIViewController {
     }
     
     private func setupViewControllers() {
-        let homeController = HomeController()
+        rightViewController = UINavigationController(rootViewController: HomeController())
         let menuController = MenuController()
-        let homeView = homeController.view!
+        let homeView = rightViewController!.view!
         let menuView = menuController.view!
         homeView.translatesAutoresizingMaskIntoConstraints = false
         menuView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +90,7 @@ class BaseSlidingController: UIViewController {
         redView.addSubview(darkView)
         blueView.addSubview(menuView)
         
-        addChild(homeController)
+        addChild(rightViewController!)
         addChild(menuController)
         
         NSLayoutConstraint.activate([
@@ -108,14 +113,13 @@ class BaseSlidingController: UIViewController {
     
     @objc func handlePan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
-        
         var x = translation.x
         
-        
         x = isMenuOpened ? x + menuWidth : x
-        darkView.alpha = abs(x) / menuWidth
         x = min(menuWidth, x)
         x = max(0, x)
+        
+        darkView.alpha = x / menuWidth
         redViewLeadingConstraint.constant = x
         
         if gesture.state == .ended {
@@ -152,16 +156,57 @@ class BaseSlidingController: UIViewController {
         }
     }
     
-    private func handleOpenMenu() {
+     func handleOpenMenu() {
         redViewLeadingConstraint.constant = menuWidth
         isMenuOpened = true
         performAnimations()
     }
     
-    private func handleCloseMenu() {
+     func handleCloseMenu() {
         redViewLeadingConstraint.constant = 0
         isMenuOpened = false
         performAnimations()
+    }
+    
+    func didSelectMenuItem(indexPath: IndexPath) {
+        removePreviousControllerFromParent()
+        handleCloseMenu()
+        
+        switch indexPath.row {
+        case 0:
+            let navController = UINavigationController(rootViewController: HomeController())
+            redView.addSubview(navController.view)
+            addChild(navController)
+            rightViewController = navController
+        case 1:
+            let navController = UINavigationController(rootViewController: ListController())
+            redView.addSubview(navController.view)
+            addChild(navController)
+            rightViewController = navController
+        case 2:
+            let bookmarksController = BookmarksController()
+            redView.addSubview(bookmarksController.view)
+            addChild(bookmarksController)
+            rightViewController = bookmarksController
+        default:
+            let dummyController = UIViewController()
+            dummyController.view.backgroundColor = .white
+            dummyController.view.frame = view.frame
+            let label = UILabel()
+            label.text = ["1", "2", "3", "4"].randomElement()
+            label.frame = dummyController.view.frame
+            dummyController.view.addSubview(label)
+            redView.addSubview(dummyController.view)
+            addChild(dummyController)
+            rightViewController = dummyController
+        }
+        
+        redView.bringSubviewToFront(darkView)
+    }
+    
+    private func removePreviousControllerFromParent() {
+        rightViewController?.view.removeFromSuperview()
+        rightViewController?.removeFromParent()
     }
     
     private func performAnimations() {
