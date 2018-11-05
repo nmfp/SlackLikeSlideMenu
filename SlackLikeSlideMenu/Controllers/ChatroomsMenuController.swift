@@ -33,16 +33,24 @@ class ChatroomsMenuController: UITableViewController {
         return sectionTitles[section]
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = ChatroomHeaderLabel()
+        label.text = sectionTitles[section]
+        label.textColor = #colorLiteral(red: 0.4156862745, green: 0.3607843137, blue: 0.4156862745, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }
-     
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatroomGroups[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = ChatRoomMenuCell(style: .default, reuseIdentifier: nil)
         cell.textLabel?.text = chatroomGroups[indexPath.section][indexPath.row]
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         cell.textLabel?.textColor = .white
@@ -50,5 +58,11 @@ class ChatroomsMenuController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 48
+    }
 }
