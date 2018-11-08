@@ -43,6 +43,7 @@ class BaseSlidingController: UIViewController {
     let velocityThreshold: CGFloat = 500
     var rightViewController: UIViewController?
     
+    let menuController = ChatroomMenuContainerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +86,7 @@ class BaseSlidingController: UIViewController {
     
     private func setupViewControllers() {
         rightViewController = UINavigationController(rootViewController: HomeController())
-        let menuController = MenuController()
+        
         let homeView = rightViewController!.view!
         let menuView = menuController.view!
         homeView.translatesAutoresizingMaskIntoConstraints = false
@@ -170,6 +171,7 @@ class BaseSlidingController: UIViewController {
         redViewTrailingConstraint.constant = menuWidth
         isMenuOpened = true
         performAnimations()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
      func handleCloseMenu() {
@@ -177,6 +179,7 @@ class BaseSlidingController: UIViewController {
         redViewTrailingConstraint.constant = 0
         isMenuOpened = false
         performAnimations()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func didSelectMenuItem(indexPath: IndexPath) {
@@ -225,5 +228,9 @@ class BaseSlidingController: UIViewController {
             self.view.layoutIfNeeded()
             self.darkView.alpha = self.isMenuOpened ? 1 : 0
         })
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isMenuOpened ? .lightContent : .default
     }
 }
