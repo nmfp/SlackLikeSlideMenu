@@ -43,7 +43,7 @@ class BaseSlidingController: UIViewController {
     let velocityThreshold: CGFloat = 500
     var rightViewController: UIViewController?
     
-    let menuController = ChatroomsMenuController()
+    let menuController = ChatroomMenuContainerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
