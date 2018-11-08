@@ -25,6 +25,7 @@ class ChatroomMenuContainerController: UIViewController {
         
         let chatroomsView = chatroomsMenuController.view!
         chatroomsView.translatesAutoresizingMaskIntoConstraints = false
+        searchContainer.searchBar.delegate = chatroomsMenuController
         
         view.addSubview(searchContainer)
         view.addSubview(chatroomsView)

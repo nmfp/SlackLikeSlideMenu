@@ -22,8 +22,11 @@ class ChatroomsMenuController: UITableViewController {
         ["Nuno Pereira", "Steve Jobs", "Tim Cook", "Barak Obama"]
     ]
 
+    var filteredGroups = [[String]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        filteredGroups = chatroomGroups
         
         tableView.separatorStyle = .none
         tableView.backgroundColor = #colorLiteral(red: 0.2980392157, green: 0.2078431373, blue: 0.2862745098, alpha: 1)
@@ -47,12 +50,12 @@ class ChatroomsMenuController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatroomGroups[section].count
+        return filteredGroups[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ChatRoomMenuCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = chatroomGroups[indexPath.section][indexPath.row]
+        cell.textLabel?.text = filteredGroups[indexPath.section][indexPath.row]
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         cell.textLabel?.textColor = .white
         cell.backgroundColor = .clear
@@ -66,4 +69,24 @@ class ChatroomsMenuController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 48
     }
+}
+
+
+extension ChatroomsMenuController : UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            filteredGroups = chatroomGroups
+            tableView.reloadData()
+            return
+        }
+        
+        filteredGroups = chatroomGroups.map({ (group) -> [String] in
+            return group.filter({ $0.lowercased().contains(searchText.lowercased())})
+        })
+        
+        tableView.reloadData()
+    }
+    
 }
